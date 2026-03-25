@@ -53,7 +53,7 @@ All services are containerized and orchestrated via Docker Compose for local dev
    └──┬───┬──┘       └────┬────┘     └────┬────┘
       │   │               │               │
       │   │    ┌──────────▼───────┐       │
-      │   │    │  Policy Driven Service     │       │
+      │   │    │  Policy DrivenSvc│       │
       │   │    │  :8020           │       │
       │   │    └──────────────────┘       │
       │   │                               │
@@ -325,12 +325,12 @@ Vector dimensions configurable (1536 for cloud embeddings, 768 for local). Conte
 
 ```
 ┌──────────────────────────────────────────────┐
-│              Provider Router                  │
+│              Provider Router                 │
 │                                              │
-│  ┌──────────┐ ┌──────────┐ ┌──────────────┐ │
-│  │Provider A│ │Provider B│ │Provider C    │ │
-│  │(OpenAI)  │ │(Anthropic│ │(Azure OpenAI)│ │
-│  └──────────┘ └──────────┘ └──────────────┘ │
+│  ┌──────────┐ ┌──────────┐ ┌──────────────┐  │
+│  │Provider A│ │Provider B│ │Provider C    │  │
+│  │(OpenAI)  │ │(Anthropic│ │(Azure OpenAI)│  │
+│  └──────────┘ └──────────┘ └──────────────┘  │
 │  ┌──────────────┐                            │
 │  │ Local (self- │                            │
 │  │  hosted)     │                            │
@@ -401,7 +401,7 @@ A shared Python package provides reusable RAG primitives consumed by the AI Orch
 │                                       │
 │  TextChunker     → token-based split  │
 │  EmbeddingClient → API w/ retry       │
-│  PgVectorStore   → HNSW + dedup      │
+│  PgVectorStore   → HNSW + dedup       │
 │  WebCrawler      → rate-limited HTTP  │
 │  Models          → SQLAlchemy ORM     │
 │  Database        → async connection   │
@@ -611,7 +611,7 @@ Request →
 
 ```
 ┌─────────────────────────────────────────────┐
-│              Rate Limiter                    │
+│              Rate Limiter                   │
 │                                             │
 │  Key: user_id (authenticated) or IP         │
 │  Backend: Redis (preferred) or in-memory    │
@@ -658,16 +658,16 @@ Three-module Terraform composition:
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                    Platform Module                   │
+│                    Platform Module                  │
 │  Management groups, policies, RBAC, monitoring,     │
-│  central resource groups, private DNS zones          │
+│  central resource groups, private DNS zones         │
 ├─────────────────────────────────────────────────────┤
-│                  Connectivity Module                 │
+│                  Connectivity Module                │
 │  Hub-spoke VNet, NAT gateway, VNet peering,         │
 │  subnet partitioning (app, data, private endpoints) │
 ├─────────────────────────────────────────────────────┤
-│          Control-Plane / Data-Plane Modules          │
-│  Workload-specific resources (compute, data, AI)     │
+│          Control-Plane / Data-Plane Modules         │
+│  Workload-specific resources (compute, data, AI)    │
 └─────────────────────────────────────────────────────┘
 ```
 
